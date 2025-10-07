@@ -246,8 +246,8 @@ CREATE DATABASE university_registration;
 USE university_registration;
 
 CREATE TABLE students (
-    student_id INT PRIMARY KEY AUTO_INCREMENT,
-
+    sid INT PRIMARY KEY AUTO_INCREMENT,
+ student_id VARCHAR(30) NOT NULL,
     -- Student Personal Info
     first_name VARCHAR(100),
     middle_name VARCHAR(100),
