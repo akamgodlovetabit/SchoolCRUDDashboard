@@ -1,4 +1,4 @@
-#Explanation of the Student Registration System
+I'm#Explanation of the Student Registration System
 
 / (root)
 ├── index.php
@@ -239,3 +239,64 @@ CREATE TABLE student_documents (
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
+
+//Project SQL file 
+
+CREATE DATABASE university_registration;
+USE university_registration;
+
+CREATE TABLE students (
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
+
+    -- Student Personal Info
+    first_name VARCHAR(100),
+    middle_name VARCHAR(100),
+    last_name VARCHAR(100),
+    avatar VARCHAR(255),  -- Profile image URL
+    gender ENUM('Male', 'Female', 'Other'),
+    date_of_birth DATE,
+
+    -- Contact Info
+    email VARCHAR(150),
+    phone_number VARCHAR(20),
+    address TEXT,
+    place_of_birth VARCHAR(100),
+    country VARCHAR(100),
+    region VARCHAR(100),
+
+    -- Guardian Info
+    father_name VARCHAR(100),
+    father_contact VARCHAR(20),
+    mother_name VARCHAR(100),
+    mother_contact VARCHAR(20),
+    guardian_name VARCHAR(100),
+    guardian_contact VARCHAR(20),
+
+    -- Academic Info
+    level VARCHAR(50),
+    department VARCHAR(100),
+    academic_year VARCHAR(20),
+    day VARCHAR(50), -- Morning, Evening, Weekend
+
+    -- Certificate Info
+    certificate_name VARCHAR(100),
+    certificate_year YEAR,
+    certificate_number VARCHAR(50),
+    certificate_type VARCHAR(50)
+);
+
+
+CREATE TABLE departments (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    department_name VARCHAR(100) NOT NULL,
+    description TEXT
+);
+-- Insert sample departments  for use
+INSERT INTO departments (department_name, description) VALUES
+('Engineering', 'Engineering and Technology programs'),
+('Science', 'Science and Mathematics programs'),
+('Arts', 'Arts and Humanities programs'),
+('Business', 'Business and Management programs'),
+('Medicine', 'Medical and Health Science programs'),
+('Law', 'Legal Studies programs'),
+('Education', 'Education and Teaching programs');
