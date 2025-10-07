@@ -230,6 +230,68 @@ closeDBConnection($conn);
 - `mysqli_error()` - Get last error
 
 
+CREATE DATABASE university_registration;
+USE university_registration;
+
+CREATE TABLE students (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    student_id VARCHAR(20) UNIQUE NOT NULL,
+    
+    -- Personal Information
+    first_name VARCHAR(50) NOT NULL,
+    middle_name VARCHAR(50),
+    last_name VARCHAR(50) NOT NULL,
+    avatar_path VARCHAR(255), -- Path to profile picture
+    date_of_birth DATE NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    place_of_birth VARCHAR(100),
+    
+    -- Contact Information
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    address TEXT,
+    country VARCHAR(50) DEFAULT 'Ghana',
+    region VARCHAR(50),
+    
+    -- Guardian Information
+    father_name VARCHAR(100),
+    father_contact VARCHAR(20),
+    mother_name VARCHAR(100),
+    mother_contact VARCHAR(20),
+    guardian_name VARCHAR(100),
+    guardian_contact VARCHAR(20),
+    guardian_relationship VARCHAR(50),
+    
+    -- Academic Information
+    year_level ENUM('First Year', 'Second Year', 'Third Year', 'Fourth Year') NOT NULL,
+    department ENUM('Engineering', 'Science', 'Arts', 'Business', 'Medicine', 'Law', 'Education') NOT NULL,
+    trade VARCHAR(100) NOT NULL,
+    academic_year YEAR NOT NULL,
+    admission_date DATE NOT NULL,
+    
+    -- Certification Information
+    certificate_name VARCHAR(100) NOT NULL,
+    certificate_type ENUM('WASSCE', 'SSSCE', 'GCE', 'BAC', 'Diploma', 'Degree', 'Other') NOT NULL,
+    certificate_year YEAR NOT NULL,
+    certificate_number VARCHAR(50) NOT NULL,
+    certificate_grade VARCHAR(10),
+    
+    -- System Information
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('Active', 'Inactive', 'Graduated', 'Suspended') DEFAULT 'Active',
+    notes TEXT
+);
+
+-- Insert sample departments
+INSERT INTO departments (department_name, description) VALUES
+('Engineering', 'Engineering and Technology programs'),
+('Science', 'Science and Mathematics programs'),
+('Arts', 'Arts and Humanities programs'),
+('Business', 'Business and Management programs'),
+('Medicine', 'Medical and Health Science programs'),
+('Law', 'Legal Studies programs'),
+('Education', 'Education and Teaching programs');
+
 -- Create table for file uploads tracking
 CREATE TABLE student_documents (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
@@ -239,64 +301,3 @@ CREATE TABLE student_documents (
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
-
-//Project SQL file 
-
-CREATE DATABASE university_registration;
-USE university_registration;
-
-CREATE TABLE students (
-    sid INT PRIMARY KEY AUTO_INCREMENT,
- student_id VARCHAR(30) NOT NULL,
-    -- Student Personal Info
-    first_name VARCHAR(100),
-    middle_name VARCHAR(100),
-    last_name VARCHAR(100),
-    avatar VARCHAR(255),  -- Profile image URL
-    gender ENUM('Male', 'Female', 'Other'),
-    date_of_birth DATE,
-
-    -- Contact Info
-    email VARCHAR(150),
-    phone_number VARCHAR(20),
-    address TEXT,
-    place_of_birth VARCHAR(100),
-    country VARCHAR(100),
-    region VARCHAR(100),
-
-    -- Guardian Info
-    father_name VARCHAR(100),
-    father_contact VARCHAR(20),
-    mother_name VARCHAR(100),
-    mother_contact VARCHAR(20),
-    guardian_name VARCHAR(100),
-    guardian_contact VARCHAR(20),
-
-    -- Academic Info
-    level VARCHAR(50),
-    department VARCHAR(100),
-    academic_year VARCHAR(20),
-    day VARCHAR(50), -- Morning, Evening, Weekend
-
-    -- Certificate Info
-    certificate_name VARCHAR(100),
-    certificate_year YEAR,
-    certificate_number VARCHAR(50),
-    certificate_type VARCHAR(50)
-);
-
-
-CREATE TABLE departments (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    department_name VARCHAR(100) NOT NULL,
-    description TEXT
-);
--- Insert sample departments  for use
-INSERT INTO departments (department_name, description) VALUES
-('Engineering', 'Engineering and Technology programs'),
-('Science', 'Science and Mathematics programs'),
-('Arts', 'Arts and Humanities programs'),
-('Business', 'Business and Management programs'),
-('Medicine', 'Medical and Health Science programs'),
-('Law', 'Legal Studies programs'),
-('Education', 'Education and Teaching programs');
